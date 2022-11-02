@@ -11,7 +11,11 @@ while True:
     print('3 search a book')
     print('4 update the book')
     print('5 delete a book')
-    print('6 exit')
+    print('6 : Update the total amount for each book depending on the return date')
+    print('7 :.Display the total number of books in each category of book table')
+    print('8 : Display the book details where book name starting character contain ')
+    print('9 : Exit')
+    
 
     choice = int(input('Enter an option: '))
     if(choice == 1):
@@ -60,5 +64,17 @@ while True:
         mycursor.execute(sql)
         mydb.commit()
         print('Deleted sucessfully !!!')
-    elif(choice==6):
-        break    
+    elif(choice == 6 ):
+        sql = 'SELECT i.`User_Id`, i.`book_id`, i.`issue_date`, i.`return_date`,DATEDIFF(i.`return_date`,i.issue_date) AS datediff,DATEDIFF(i.`return_date`,i.issue_date)*b.charge_p_day AS Total_Amount FROM `issuing_book` i JOIN books_detail b ON i.book_id=b.id'
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+        for i in result:
+            print(i)
+        
+    elif(choice == 7):
+        print('displays Total number of books for each category')
+    elif(choice == 8):
+        print('Displays the character which you needed ')
+    elif(choice == 9):
+        break
+    
